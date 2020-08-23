@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-08-21 10:09:49
+/* Smarty version 3.1.34-dev-7, created on 2020-08-23 07:21:04
   from '/Applications/MAMP/htdocs/htdocs/mvc/application/template/admin/login.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5f3f9d6d729a88_93571845',
+  'unifunc' => 'content_5f4218e0a62a30_53386027',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b1f4375127b49a4a301ed6fef751babf8966185e' => 
     array (
       0 => '/Applications/MAMP/htdocs/htdocs/mvc/application/template/admin/login.html',
-      1 => 1598004586,
+      1 => 1598166930,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f3f9d6d729a88_93571845 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f4218e0a62a30_53386027 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +30,14 @@ function content_5f3f9d6d729a88_93571845 (Smarty_Internal_Template $_smarty_tpl)
 admin/bootstrap.css">
     <link rel="stylesheet" href="<?php echo CSS_ADD;?>
 admin/login.css">
+    <?php echo '<script'; ?>
+ src="<?php echo JS_ADD;?>
+jquery-3.4.1.min.js"><?php echo '</script'; ?>
+>
+    <?php echo '<script'; ?>
+ src="<?php echo JS_ADD;?>
+jquery.validate.js"><?php echo '</script'; ?>
+>
     <?php echo '<script'; ?>
  src="<?php echo JS_ADD;?>
 admin.js"><?php echo '</script'; ?>

@@ -2,35 +2,39 @@
 if (!defined("MVC")) {
     echo '非法入侵';
 }
+use \libs\smarty;
+use \libs\db;
 class index {
 
     function int(){
         $smarty = new Smarty();
-        $smarty->setTemplateDir(TPL_PATH);
-        $smarty->setCompileDir(COMPILE_PATH);
         $smarty->display("admin/login.html");
     }
 
     function login() {
-        $uname = $_POST['uname'];
-        $pwd = $_POST['pwd'];
-
+        $uname = addslashes($_POST['uname']);
+        $pwd = md5(md5($_POST['pwd']));
+        //验证
+        if (strlen($uname)<1||empty($pwd)) {
+            echo "用户输入不正确";
+            return;
+        }
         //连接数据库
-        $db = new mysqli('localhost', 'root', 'root','phpdemo');
-        $db->query('utf8');
-        $result = $db->query("select * from user where uname = '$uname' and pwd = '$pwd'");
+        $database = new db();
+        $db = $database->db;
+        $result = $db->query("select * from user where uname = '{$uname}' and pwd = '{$pwd}'");
         if (!$result->num_rows) {
             echo '没有相应数据';
         }else {
-//            header("location:/first");
             header("location:http://localhost:8888/htdocs/mvc/index.php/admin/index/first/");
-//            echo "ok";
         }
+
+        $db->close();
 
     }
 
     function first() {
-        echo 'ok';
+        echo '后台';
     }
 
 
