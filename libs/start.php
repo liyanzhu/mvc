@@ -43,7 +43,8 @@ define("JS_ADD", STATIC_ADD."js".DIRECTORY_SEPARATOR);
 define("IMG_ADD", STATIC_ADD."img".DIRECTORY_SEPARATOR);
 //font地址
 define("FONT_ADD", STATIC_ADD."font".DIRECTORY_SEPARATOR);
-
+//font本地路径
+define("FONT_PATH", APP_NAME."static/font");
 
 //配置项
 $config = include_once APP_NAME."config.php";
@@ -64,4 +65,6 @@ function auto($classname) {
 spl_autoload_register("auto");
 $route = new \libs\route();
 $route->run();
+
+//echo $_COOKIE['name'];
 

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.34-dev-7, created on 2020-08-23 07:21:04
+/* Smarty version 3.1.34-dev-7, created on 2020-08-24 12:55:59
   from '/Applications/MAMP/htdocs/htdocs/mvc/application/template/admin/login.html' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.34-dev-7',
-  'unifunc' => 'content_5f4218e0a62a30_53386027',
+  'unifunc' => 'content_5f43b8dfcd4c58_35878691',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'b1f4375127b49a4a301ed6fef751babf8966185e' => 
     array (
       0 => '/Applications/MAMP/htdocs/htdocs/mvc/application/template/admin/login.html',
-      1 => 1598166930,
+      1 => 1598273758,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_5f4218e0a62a30_53386027 (Smarty_Internal_Template $_smarty_tpl) {
+function content_5f43b8dfcd4c58_35878691 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,6 +42,11 @@ jquery.validate.js"><?php echo '</script'; ?>
  src="<?php echo JS_ADD;?>
 admin.js"><?php echo '</script'; ?>
 >
+    <?php echo '<script'; ?>
+>
+        // document.cookie="name=lyz";
+    <?php echo '</script'; ?>
+>
 </head>
 <body>
     <form class="form-horizontal" action="http://localhost:8888/htdocs/mvc/index.php/admin/index/login/" method="post">
@@ -59,6 +64,14 @@ admin.js"><?php echo '</script'; ?>
             </div>
         </div>
         <div class="form-group">
+            <label for="code" class="col-sm-2 control-label">验证码</label>
+            <div class="col-sm-10">
+                <input type="text" placeholder="请输入验证码" id="code" name="code">
+                <img src="http://localhost:8888/htdocs/mvc/index.php/admin/index/mycode" alt="" onclick="this.src='http://localhost:8888/htdocs/mvc/index.php/admin/index/mycode?'+Math.random()" style="cursor: pointer;width: 120px">
+                看不清楚？点击切换
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <div class="checkbox">
                     <label>
@@ -71,7 +84,7 @@ admin.js"><?php echo '</script'; ?>
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-default">登陆</button>
                 &nbsp;&nbsp;没有账号？请
-                <a href="http://localhost:8888/htdocs/mvc/index.php/admin/reg/add" class="btn btn-default">注册</a>
+                <a href="http://localhost:8888/htdocs/mvc/index.php/admin/reg/add">注册</a>
             </div>
         </div>
     </form>

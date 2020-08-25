@@ -10,7 +10,7 @@ class code{
     public $fontAngle=array("min"=>-15,"max"=>15);
     public $lineNum=array("min"=>2,"max"=>4);
     public $lineWidth=array("min"=>1,"max"=>2);
-    public $pixNum=array("min"=>50,"max"=>100);
+    public $pixNum=array("min"=>80,"max"=>100);
     private function createCanvas(){
         $this->image=imagecreatetruecolor($this->width,$this->height);
         imagefill($this->image,0,0,$this->setColor());
@@ -35,8 +35,8 @@ class code{
             $size=mt_rand($this->fontSize["min"],$this->fontSize["max"]);
             $angle=mt_rand($this->fontAngle["min"],$this->fontAngle["max"]);
             $space=$this->width/($this->codeLen*2+1);
-            $box=imagettfbbox($size,$angle,"D:\WampServer\www/2006\MVC\application\static/font/demo.TTF",$str[$i]);
-            imagettftext($this->image,$size,$angle,mt_rand(max($space*($i*2-1)+5,0),$space*($i*2+1)-5),($box[0]-$box[7])+mt_rand(0,$this->height-($box[0]-$box[7])),$this->setColor(),"D:\WampServer\www/2006\MVC\application\static/font/demo.TTF",$str[$i]);
+            $box=imagettfbbox($size,$angle,"/Applications/MAMP/htdocs/htdocs/mvc/application/static/font/demo.otf",$str[$i]);
+            imagettftext($this->image,$size,$angle,mt_rand(max($space*($i*2-1)+5,0),$space*($i*2+1)-5),($box[0]-$box[7])+mt_rand(0,$this->height-($box[0]-$box[7])),$this->setColor(),"/Applications/MAMP/htdocs/htdocs/mvc/application/static/font/demo.otf",$str[$i]);
         }
     }
     private function setLine(){
@@ -68,8 +68,11 @@ class code{
         $this->setPix();
         //写入cookie
         $_SESSION["code"]=$this->str;
+//        setcookie(code,$this->str,0,"/");
         $outtype="image".$this->type;
         $outtype($this->image);
         imagedestroy($this->image);
     }
 }
+
+
