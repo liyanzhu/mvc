@@ -1,16 +1,32 @@
 <?php
 namespace libs;
 class code{
-    public $type="png";
-    public $width=160;
-    public $height=50;
-    public $codeLen=4;
-    public $seed="abcdefhjkmnprstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ345678";
-    public $fontSize=array("min"=>20,"max"=>35);
-    public $fontAngle=array("min"=>-15,"max"=>15);
-    public $lineNum=array("min"=>2,"max"=>4);
-    public $lineWidth=array("min"=>1,"max"=>2);
-    public $pixNum=array("min"=>80,"max"=>100);
+    public $type;
+    public $width;
+    public $height;
+    public $codeLen;
+    public $seed;
+    public $fontSize;
+    public $fontAngle;
+    public $lineNum;
+    public $lineWidth;
+    public $pixNum;
+    public $fontFile;
+    function __construct(){
+        global $config;
+         $this->type=$config["code"]["type"]?$config["code"]["type"]:"png";
+         $this->width=$config["code"]["width"]?$config["code"]["width"]:160;
+         $this->height=$config["code"]["height"]?$config["code"]["height"]:50;
+         $this->codeLen=$config["code"]["codeLen"]?$config["code"]["codeLen"]:4;
+         $this->seed=$config["code"]["seed"]?$config["code"]["seed"]:"abcdefhjkmnprstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ345678";
+         $this->fontSize=$config["code"]["fontSize"]?$config["code"]["fontSize"]:array("min"=>20,"max"=>35);
+         $this->fontAngle=$config["code"]["fontAngle"]?$config["code"]["fontAngle"]:array("min"=>-15,"max"=>15);
+         $this->lineNum=$config["code"]["lineNum"]?$config["code"]["lineNum"]:array("min"=>2,"max"=>4);
+         $this->lineWidth=$config["code"]["lineWidth"]?$config["code"]["lineWidth"]:array("min"=>1,"max"=>2);
+         $this->pixNum=$config["code"]["pixNum"]?$config["code"]["pixNum"]:array("min"=>80,"max"=>100);
+         $this->fontFile=$config["code"]["fontFile"]?$config["code"]["fontFile"]:"/Applications/MAMP/htdocs/htdocs/mvc/application/static/font/demo.otf";
+    }
+
     private function createCanvas(){
         $this->image=imagecreatetruecolor($this->width,$this->height);
         imagefill($this->image,0,0,$this->setColor());
@@ -35,8 +51,8 @@ class code{
             $size=mt_rand($this->fontSize["min"],$this->fontSize["max"]);
             $angle=mt_rand($this->fontAngle["min"],$this->fontAngle["max"]);
             $space=$this->width/($this->codeLen*2+1);
-            $box=imagettfbbox($size,$angle,"/Applications/MAMP/htdocs/htdocs/mvc/application/static/font/demo.otf",$str[$i]);
-            imagettftext($this->image,$size,$angle,mt_rand(max($space*($i*2-1)+5,0),$space*($i*2+1)-5),($box[0]-$box[7])+mt_rand(0,$this->height-($box[0]-$box[7])),$this->setColor(),"/Applications/MAMP/htdocs/htdocs/mvc/application/static/font/demo.otf",$str[$i]);
+            $box=imagettfbbox($size,$angle,$this->fontFile,$str[$i]);
+            imagettftext($this->image,$size,$angle,mt_rand(max($space*($i*2-1)+5,0),$space*($i*2+1)-5),($box[0]-$box[7])+mt_rand(0,$this->height-($box[0]-$box[7])),$this->setColor(),$this->fontFile,$str[$i]);
         }
     }
     private function setLine(){

@@ -14,13 +14,16 @@ class index {
         $smarty->display("admin/login.html");
     }
     function login() {
+        global $config;
         $uname = addslashes($_POST['uname']);
         $pwd = md5(md5($_POST['pwd']));
         //验证码
 //        if (!(isset($_COOKIE['code'])&&$_COOKIE['code']==$_POST['code'])) {
-        if (!($_POST["code"]==$_SESSION["code"])) {
-            echo "验证码输入有误";
-            return;
+        if ($config["code"]["ischeck"]){
+            if (!($_POST["code"]==$_SESSION["code"])) {
+                echo "验证码输入有误";
+                return;
+            }
         }
         //验证
         if (strlen($uname)<1||empty($pwd)) {
@@ -40,18 +43,24 @@ class index {
 //            $cookie->setCookie("login", "yes");
 
             $_SESSION["login"] = "yes";
+            $_SESSION["uname"] = $uname;
             header("location:http://localhost:8888/htdocs/mvc/index.php/admin/index/first/");
         }
-
         $db->close();
-
+    }
+    function logout() {
+        session_destroy();
+        header("location:http://localhost:8888/htdocs/mvc/index.php/admin");
     }
     function first() {
 //        if (isset($_COOKIE["login"])&&$_COOKIE["login"]=="yes") {
 //        $cookie = new cookie();
 //        if ($cookie->isCookie("login")&&$cookie->getCookie("login")=="yes"){
         if (isset($_SESSION["login"])&&$_SESSION["login"]=="yes"){
-            echo '后台';
+            $smarty = new smarty();
+            $smarty->assign("uname", $_SESSION["uname"]);
+            $smarty->display("admin/index.html");
+
         }else {
             //没有login则直接返回到登陆页面
             header("location:http://localhost:8888/htdocs/mvc/index.php/admin");
